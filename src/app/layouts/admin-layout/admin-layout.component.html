@@ -1,0 +1,9 @@
+<div class="app-shell app-shell--admin">
+  <app-sidebar [isAdmin]="true" />
+  <div class="app-shell__main">
+    <app-topbar [userName]="userName" [userRole]="userRole" />
+    <main class="app-shell__content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

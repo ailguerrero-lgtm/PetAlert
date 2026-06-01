@@ -1,0 +1,106 @@
+<div class="page-container settings-page">
+  <h1 class="page-title">Configuración</h1>
+
+  <mat-card class="settings-section">
+    <div class="settings-section__header">
+      <app-lucide-icon name="user" [size]="24" color="#2563EB" />
+      <h2>Perfil Personal</h2>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-avatar-block">
+        <div class="profile-avatar">JP</div>
+        <button mat-stroked-button>Cambiar Foto</button>
+      </div>
+      <div class="profile-fields">
+        <div class="fields-grid">
+          <mat-form-field appearance="outline"><mat-label>Nombre</mat-label><input matInput value="Dr. Juan Pérez" /></mat-form-field>
+          <mat-form-field appearance="outline"><mat-label>Correo Electrónico</mat-label><input matInput value="juan.perez@petalert.com" /></mat-form-field>
+          <mat-form-field appearance="outline"><mat-label>Teléfono</mat-label><input matInput value="+1 234-567-8901" /></mat-form-field>
+          <mat-form-field appearance="outline"><mat-label>Especialidad</mat-label><input matInput value="Cirugía General" /></mat-form-field>
+          <mat-form-field appearance="outline" class="full-span">
+            <mat-label>Biografía</mat-label>
+            <textarea matInput rows="3">Veterinario con 10 años de experiencia en cirugía general y emergencias.</textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="settings-section__footer">
+      <button mat-flat-button class="btn-primary"><app-lucide-icon name="save" [size]="18" /> Guardar Cambios</button>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-section">
+    <div class="settings-section__header">
+      <app-lucide-icon name="building" [size]="24" color="#2563EB" />
+      <h2>Información de la Clínica</h2>
+    </div>
+    <div class="fields-grid">
+      <mat-form-field appearance="outline"><mat-label>Nombre de la Clínica</mat-label><input matInput value="Clínica Veterinaria PetAlert" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Teléfono Principal</mat-label><input matInput value="+1 800-PET-ALERT" /></mat-form-field>
+      <mat-form-field appearance="outline" class="full-span"><mat-label>Dirección</mat-label><input matInput value="123 Calle Principal, Ciudad, País" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Horario de Atención</mat-label><input matInput value="Lun-Vie: 8AM - 8PM" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Email de Contacto</mat-label><input matInput value="info@petalert.com" /></mat-form-field>
+    </div>
+    <div class="settings-section__footer">
+      <button mat-flat-button class="btn-primary"><app-lucide-icon name="save" [size]="18" /> Guardar Cambios</button>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-section">
+    <div class="settings-section__header">
+      <app-lucide-icon name="bell" [size]="24" color="#2563EB" />
+      <h2>Notificaciones</h2>
+    </div>
+    <div class="toggles-list">
+      <mat-slide-toggle [checked]="notifications().email" (change)="updateNotification('email', $event.checked)">
+        Notificaciones por correo electrónico
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="notifications().sms" (change)="updateNotification('sms', $event.checked)">
+        Notificaciones por SMS
+      </mat-slide-toggle>
+      <hr class="divider" />
+      <p class="toggles-list__subtitle">Tipos de Notificaciones</p>
+      <mat-slide-toggle [checked]="notifications().emergencias" (change)="updateNotification('emergencias', $event.checked)">
+        Alertas de emergencias
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="notifications().citas" (change)="updateNotification('citas', $event.checked)">
+        Recordatorios de citas
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="notifications().reportes" (change)="updateNotification('reportes', $event.checked)">
+        Reportes semanales
+      </mat-slide-toggle>
+    </div>
+    <div class="settings-section__footer">
+      <button mat-flat-button class="btn-primary"><app-lucide-icon name="save" [size]="18" /> Guardar Preferencias</button>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-section">
+    <div class="settings-section__header">
+      <app-lucide-icon name="lock" [size]="24" color="#2563EB" />
+      <h2>Seguridad</h2>
+    </div>
+    <div class="fields-grid">
+      <mat-form-field appearance="outline" class="full-span">
+        <mat-label>Contraseña Actual</mat-label>
+        <input matInput type="password" placeholder="Ingresa tu contraseña actual" />
+      </mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Nueva Contraseña</mat-label><input matInput type="password" placeholder="Ingresa nueva contraseña" /></mat-form-field>
+      <mat-form-field appearance="outline"><mat-label>Confirmar Contraseña</mat-label><input matInput type="password" placeholder="Confirma tu nueva contraseña" /></mat-form-field>
+    </div>
+    <div class="settings-section__footer">
+      <button mat-flat-button class="btn-primary"><app-lucide-icon name="lock" [size]="18" /> Cambiar Contraseña</button>
+    </div>
+  </mat-card>
+
+  <mat-card class="settings-section">
+    <div class="settings-section__header">
+      <app-lucide-icon name="palette" [size]="24" color="#2563EB" />
+      <h2>Apariencia</h2>
+    </div>
+    <mat-slide-toggle [checked]="true">Modo oscuro</mat-slide-toggle>
+    <div class="settings-section__footer">
+      <button mat-flat-button class="btn-primary"><app-lucide-icon name="save" [size]="18" /> Guardar Preferencias</button>
+    </div>
+  </mat-card>
+</div>

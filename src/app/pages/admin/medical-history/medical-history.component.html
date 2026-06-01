@@ -1,0 +1,74 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Historial Médico</h1>
+      <p class="page-subtitle">Registro completo de consultas, tratamientos y medicamentos</p>
+    </div>
+    <button mat-flat-button class="btn-primary">
+      <app-lucide-icon name="download" [size]="20" />
+      Exportar Historial
+    </button>
+  </div>
+
+  <mat-card class="search-card">
+    <mat-form-field appearance="outline" class="search-field">
+      <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
+      <input matInput placeholder="Buscar por mascota, diagnóstico o veterinario..." [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" />
+    </mat-form-field>
+  </mat-card>
+
+  <div class="timeline">
+    <div class="timeline__line"></div>
+    @for (record of filteredRecords(); track record.id) {
+      <div class="timeline__item">
+        <div
+          class="timeline__dot"
+          [style.background]="getTypeConfig(record.type).bg"
+          [style.border-color]="getTypeConfig(record.type).color"
+        ></div>
+        <mat-card class="record-card">
+          <div class="record-card__grid">
+            <div class="record-card__sidebar">
+              <div class="record-card__icon" [style.background]="getTypeConfig(record.type).bg">
+                <app-lucide-icon [name]="getTypeConfig(record.type).icon" [size]="24" [color]="getTypeConfig(record.type).color" />
+              </div>
+              <mat-chip [style.background]="getTypeConfig(record.type).bg" [style.color]="getTypeConfig(record.type).color">
+                {{ record.type }}
+              </mat-chip>
+              <div class="record-card__date">
+                <app-lucide-icon name="calendar" [size]="16" color="#64748B" />
+                <span>{{ record.date }}</span>
+              </div>
+              <h3 class="record-card__pet">{{ record.pet }}</h3>
+              <p class="record-card__doctor">{{ record.doctor }}</p>
+            </div>
+            <div class="record-card__content">
+              <p class="record-card__section-title">Diagnóstico</p>
+              <p class="record-card__text">{{ record.diagnosis }}</p>
+              <div class="record-card__cols">
+                <div>
+                  <p class="record-card__section-title">Tratamiento</p>
+                  <p class="record-card__text">{{ record.treatment }}</p>
+                </div>
+                @if (record.medications.length > 0) {
+                  <div>
+                    <p class="record-card__section-title">Medicamentos</p>
+                    <div class="record-card__meds">
+                      @for (med of record.medications; track med) {
+                        <mat-chip class="med-chip">{{ med }}</mat-chip>
+                      }
+                    </div>
+                  </div>
+                }
+              </div>
+              <p class="record-card__section-title">Observaciones</p>
+              <div class="record-card__notes">
+                <p>{{ record.notes }}</p>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    }
+  </div>
+</div>

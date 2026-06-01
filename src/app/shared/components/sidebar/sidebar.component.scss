@@ -1,0 +1,65 @@
+$primary: #2563eb;
+$muted: #64748b;
+$border: #e2e8f0;
+$bg-hover: #f8fafc;
+$bg-selected: #eff6ff;
+$sidebar-width: 260px;
+
+.sidebar {
+  width: $sidebar-width;
+  background: white;
+  border-right: 1px solid $border;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  z-index: 100;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+  }
+
+  &__title {
+    margin-left: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $primary;
+  }
+
+  &__nav {
+    padding: 0.5rem 1rem;
+  }
+
+  &__link {
+    border-radius: 8px !important;
+    margin-bottom: 4px;
+    color: $muted;
+
+    &--active,
+    &.sidebar__link--active {
+      background: $bg-selected !important;
+      color: $primary !important;
+
+      .sidebar__icon {
+        color: $primary;
+      }
+
+      span {
+        font-weight: 600;
+        color: $primary;
+      }
+    }
+
+    &:hover:not(.sidebar__link--active) {
+      background: $bg-hover !important;
+    }
+  }
+}

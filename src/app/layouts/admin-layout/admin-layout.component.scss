@@ -1,0 +1,18 @@
+@use '../../pages/page-theme' as theme;
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: theme.$bg;
+
+  &--admin .app-shell__main {
+    margin-left: theme.$sidebar-width;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__content {
+    padding-top: 64px;
+    min-height: 100vh;
+  }
+}

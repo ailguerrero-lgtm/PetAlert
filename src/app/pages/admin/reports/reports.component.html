@@ -1,0 +1,123 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Reportes y Estadísticas</h1>
+      <p class="page-subtitle">Análisis detallado del rendimiento de la clínica</p>
+    </div>
+    <div class="page-header__actions">
+      <mat-form-field appearance="outline" class="period-select">
+        <mat-label>Período</mat-label>
+        <mat-select [(value)]="period">
+          <mat-option value="semana">Esta Semana</mat-option>
+          <mat-option value="mes">Este Mes</mat-option>
+          <mat-option value="trimestre">Trimestre</mat-option>
+          <mat-option value="año">Año</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-flat-button class="btn-primary">
+        <app-lucide-icon name="download" [size]="20" />
+        Exportar PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <mat-card class="summary-card">
+      <div class="summary-card__row">
+        <div>
+          <p class="summary-card__label">Total Consultas</p>
+          <p class="summary-card__value summary-card__value--primary">715</p>
+          <div class="summary-card__trend">
+            <app-lucide-icon name="trending-up" [size]="16" color="#10B981" />
+            <span class="trend--up">+12% vs mes anterior</span>
+          </div>
+        </div>
+        <div class="summary-card__icon summary-card__icon--primary">
+          <app-lucide-icon name="file-text" [size]="24" color="#2563EB" />
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="summary-card">
+      <div class="summary-card__row">
+        <div>
+          <p class="summary-card__label">Ingresos Totales</p>
+          <p class="summary-card__value summary-card__value--secondary">$91.5K</p>
+          <div class="summary-card__trend">
+            <app-lucide-icon name="trending-up" [size]="16" color="#10B981" />
+            <span class="trend--up">+18% vs mes anterior</span>
+          </div>
+        </div>
+        <div class="summary-card__icon summary-card__icon--secondary">
+          <app-lucide-icon name="dollar-sign" [size]="24" color="#10B981" />
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="summary-card">
+      <div class="summary-card__row">
+        <div>
+          <p class="summary-card__label">Pacientes Activos</p>
+          <p class="summary-card__value summary-card__value--warning">430</p>
+          <div class="summary-card__trend">
+            <app-lucide-icon name="trending-up" [size]="16" color="#10B981" />
+            <span class="trend--up">+8% vs mes anterior</span>
+          </div>
+        </div>
+        <div class="summary-card__icon summary-card__icon--warning">
+          <app-lucide-icon name="calendar" [size]="24" color="#F59E0B" />
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="summary-card">
+      <div class="summary-card__row">
+        <div>
+          <p class="summary-card__label">Tasa Satisfacción</p>
+          <p class="summary-card__value summary-card__value--purple">98%</p>
+          <div class="summary-card__trend">
+            <app-lucide-icon name="trending-up" [size]="16" color="#10B981" />
+            <span class="trend--up">+2% vs mes anterior</span>
+          </div>
+        </div>
+        <div class="summary-card__icon summary-card__icon--purple">
+          <app-lucide-icon name="trending-up" [size]="24" color="#A855F7" />
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="charts-grid charts-grid--reports">
+    <mat-card class="chart-card chart-card--wide">
+      <h2 class="chart-card__title">Actividad Mensual</h2>
+      <div class="chart-card__canvas-wrap chart-card__canvas-wrap--tall">
+        <canvas #barChartCanvas></canvas>
+      </div>
+    </mat-card>
+    <mat-card class="chart-card">
+      <h2 class="chart-card__title">Distribución por Especie</h2>
+      <div class="chart-card__canvas-wrap chart-card__canvas-wrap--tall">
+        <canvas #pieChartCanvas></canvas>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="chart-card chart-card--full">
+    <h2 class="chart-card__title">Ingresos Mensuales</h2>
+    <div class="chart-card__canvas-wrap">
+      <canvas #lineChartCanvas></canvas>
+    </div>
+  </mat-card>
+
+  <mat-card class="treatments-card">
+    <h2 class="chart-card__title">Servicios Más Solicitados</h2>
+    @for (treatment of topTreatments; track treatment.name) {
+      <div class="treatment-row">
+        <div class="treatment-row__header">
+          <span class="treatment-row__name">{{ treatment.name }}</span>
+          <span class="treatment-row__count">{{ treatment.count }} servicios ({{ treatment.percentage }}%)</span>
+        </div>
+        <div class="treatment-row__bar-bg">
+          <div class="treatment-row__bar" [style.width.%]="treatment.percentage"></div>
+        </div>
+      </div>
+    }
+  </mat-card>
+</div>

@@ -1,0 +1,77 @@
+.calendar {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  &__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  &__weekday {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 600;
+  }
+
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+}
+
+.day {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 0.875rem;
+  cursor: default;
+  color: #94a3b8;
+
+  &--empty {
+    visibility: hidden;
+  }
+
+  &--available {
+    cursor: pointer;
+    color: #1e293b;
+    background: #d1fae5;
+
+    &:hover {
+      background: #10b981;
+      color: white;
+    }
+  }
+
+  &--full {
+    background: #fee2e2;
+    color: #ef4444;
+    cursor: not-allowed;
+  }
+
+  &--disabled {
+    color: #cbd5e1;
+  }
+
+  &--selected {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  &--today {
+    font-weight: 700;
+  }
+}

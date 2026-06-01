@@ -1,0 +1,66 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Registro de Mascotas</h1>
+      <p class="page-subtitle">Gestiona el perfil de todos los pacientes</p>
+    </div>
+    <button mat-flat-button class="btn-primary">
+      <app-lucide-icon name="plus" [size]="20" />
+      Registrar Mascota
+    </button>
+  </div>
+
+  <mat-card class="search-card">
+    <mat-form-field appearance="outline" class="search-field">
+      <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
+      <input matInput placeholder="Buscar por nombre, dueño o raza..." [ngModel]="searchTerm()" (ngModelChange)="searchTerm.set($event)" />
+    </mat-form-field>
+  </mat-card>
+
+  <div class="stats-grid stats-grid--4">
+    <mat-card class="stat-box">
+      <p class="stat-box__value stat-box__value--primary">{{ pets.length }}</p>
+      <p class="stat-box__label">Total Mascotas</p>
+    </mat-card>
+    <mat-card class="stat-box">
+      <p class="stat-box__value stat-box__value--secondary">{{ healthyCount() }}</p>
+      <p class="stat-box__label">Saludables</p>
+    </mat-card>
+    <mat-card class="stat-box">
+      <p class="stat-box__value stat-box__value--warning">{{ treatmentCount() }}</p>
+      <p class="stat-box__label">En Tratamiento</p>
+    </mat-card>
+    <mat-card class="stat-box">
+      <p class="stat-box__value stat-box__value--primary">{{ recoveryCount() }}</p>
+      <p class="stat-box__label">En Recuperación</p>
+    </mat-card>
+  </div>
+
+  <div class="pets-grid">
+    @for (pet of filteredPets(); track pet.id) {
+      <mat-card class="pet-card">
+        <div class="pet-card__image-wrap">
+          <img [src]="pet.image" [alt]="pet.name" class="pet-card__image" />
+          <mat-chip [class]="getStatusClass(pet.status)">{{ pet.status }}</mat-chip>
+        </div>
+        <div class="pet-card__body">
+          <h3 class="pet-card__name">{{ pet.name }}</h3>
+          <p class="pet-card__breed">{{ pet.breed }} • {{ pet.age }}</p>
+          <div class="pet-card__meta">
+            <app-lucide-icon name="heart" [size]="16" color="#64748B" />
+            <span>Dueño: {{ pet.owner }}</span>
+          </div>
+          <div class="pet-card__meta">
+            <app-lucide-icon name="calendar" [size]="16" color="#64748B" />
+            <span>Última visita: {{ pet.lastVisit }}</span>
+          </div>
+          <div class="pet-card__meta">
+            <app-lucide-icon name="syringe" [size]="16" color="#64748B" />
+            <span>Próxima vacuna: {{ pet.nextVaccine }}</span>
+          </div>
+          <button mat-stroked-button class="pet-card__btn">Ver Perfil Completo</button>
+        </div>
+      </mat-card>
+    }
+  </div>
+</div>

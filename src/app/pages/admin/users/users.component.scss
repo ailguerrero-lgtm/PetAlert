@@ -1,0 +1,119 @@
+@use '../../page-theme' as *;
+
+.filter-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filter-stat {
+  padding: 1.5rem !important;
+  text-align: center;
+  cursor: pointer;
+  @include card;
+  box-shadow: none !important;
+  transition: background 0.2s;
+
+  &:hover { background: $bg; }
+
+  &--active {
+    background: #eff6ff !important;
+  }
+
+  &__value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+
+    &--primary { color: $primary; }
+    &--secondary { color: $secondary; }
+  }
+
+  &__label {
+    color: $muted;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+}
+
+.table-card {
+  @include card;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.users-table {
+  width: 100%;
+
+  th {
+    background: $bg;
+    font-weight: 600;
+  }
+
+  tr:hover td {
+    background: $bg;
+  }
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $secondary;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+
+    &--vet { background: $primary; }
+  }
+
+  &__name {
+    font-weight: 600;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  &__id {
+    color: $muted;
+    margin: 0;
+    font-size: 0.75rem;
+  }
+}
+
+.contact-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: $muted;
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+:host ::ng-deep {
+  .role--vet { background: #dbeafe !important; color: $primary !important; font-weight: 600; }
+  .role--client { background: #d1fae5 !important; color: $secondary !important; font-weight: 600; }
+  .status--active { background: #d1fae5 !important; color: $secondary !important; font-weight: 600; }
+  .status--inactive { background: #fee2e2 !important; color: $error !important; font-weight: 600; }
+}

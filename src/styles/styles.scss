@@ -1,0 +1,56 @@
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$green-palette,
+    ),
+    typography: (
+      brand-family: 'Inter, Roboto, Helvetica, Arial, sans-serif',
+      plain-family: 'Inter, Roboto, Helvetica, Arial, sans-serif',
+    ),
+    density: 0,
+  ));
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-container-color: #2563eb;
+  --mdc-filled-button-label-text-color: #fff;
+}
+
+.mat-mdc-raised-button.mat-primary:hover,
+.mat-mdc-unelevated-button.mat-primary:hover {
+  --mdc-filled-button-container-color: #1e40af;
+}
+
+.mat-mdc-outlined-button {
+  --mdc-outlined-button-outline-color: #e2e8f0;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.page-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}

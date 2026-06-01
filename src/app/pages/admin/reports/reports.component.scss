@@ -1,0 +1,144 @@
+@use '../../page-theme' as *;
+
+.page-header__actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.period-select {
+  min-width: 150px;
+}
+
+.summary-card {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__label {
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0 0 0.25rem;
+  }
+
+  &__value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+
+    &--primary { color: $primary; }
+    &--secondary { color: $secondary; }
+    &--warning { color: $warning; }
+    &--purple { color: #a855f7; }
+  }
+
+  &__trend {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+  }
+
+  &__icon {
+    padding: 0.75rem;
+    border-radius: 8px;
+
+    &--primary { background: #dbeafe; }
+    &--secondary { background: #d1fae5; }
+    &--warning { background: #fef3c7; }
+    &--purple { background: #f3e8ff; }
+  }
+}
+
+.trend--up {
+  font-size: 0.75rem;
+  color: $secondary;
+}
+
+.charts-grid--reports {
+  grid-template-columns: 2fr 1fr;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    color: $text;
+  }
+
+  &__canvas-wrap {
+    height: 300px;
+    position: relative;
+  }
+}
+
+.chart-card--full {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+  margin-bottom: 2rem;
+}
+
+.chart-card__canvas-wrap--tall {
+  height: 350px;
+}
+
+.treatments-card {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+}
+
+.treatment-row {
+  margin-bottom: 1.5rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  &__count {
+    color: $muted;
+    font-size: 0.875rem;
+  }
+
+  &__bar-bg {
+    width: 100%;
+    background: $border;
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  &__bar {
+    height: 100%;
+    background: $primary;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+}

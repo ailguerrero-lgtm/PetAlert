@@ -1,0 +1,131 @@
+<div class="landing">
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__logo">
+          <app-lucide-icon name="heart" [size]="48" [fill]="true" class="hero__heart" />
+        </div>
+        <h1 class="hero__title">PetAlert</h1>
+        <p class="hero__tagline">
+          Atención veterinaria rápida, inteligente y segura para tus mascotas
+        </p>
+        <div class="hero__actions">
+          <button mat-flat-button class="hero__btn hero__btn--light" type="button" (click)="scrollTo('auth-section')">
+            Comenzar
+          </button>
+          <button mat-stroked-button class="hero__btn hero__btn--outline" type="button" (click)="scrollTo('about-section')">
+            Siguiente
+          </button>
+        </div>
+      </div>
+      <div class="hero__image-wrap">
+        <img [src]="heroImage" alt="Veterinary Clinic" class="hero__image" />
+      </div>
+    </div>
+  </section>
+
+  <section id="about-section" class="about">
+    <div class="about__inner">
+      <h2 class="about__title">¿Quiénes somos?</h2>
+      <p class="about__text">
+        PetAlert es una plataforma inteligente diseñada para ayudar a clínicas veterinarias a gestionar emergencias,
+        citas e historiales médicos de mascotas de forma rápida y organizada.
+      </p>
+      <div class="features-grid">
+        <mat-card class="feature-card">
+          <div class="feature-card__icon feature-card__icon--blue">
+            <app-lucide-icon name="clock" [size]="32" color="#2563EB" />
+          </div>
+          <h3 class="feature-card__title">Atención Rápida</h3>
+          <p class="feature-card__body">
+            Sistema de emergencias que prioriza casos urgentes para atención inmediata
+          </p>
+        </mat-card>
+        <mat-card class="feature-card">
+          <div class="feature-card__icon feature-card__icon--green">
+            <app-lucide-icon name="heart" [size]="32" color="#10B981" />
+          </div>
+          <h3 class="feature-card__title">Cuidado Integral</h3>
+          <p class="feature-card__body">
+            Historial médico completo y seguimiento personalizado para cada mascota
+          </p>
+        </mat-card>
+        <mat-card class="feature-card">
+          <div class="feature-card__icon feature-card__icon--blue">
+            <app-lucide-icon name="shield" [size]="32" color="#2563EB" />
+          </div>
+          <h3 class="feature-card__title">Seguridad Total</h3>
+          <p class="feature-card__body">
+            Información protegida y accesible solo para veterinarios autorizados
+          </p>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <section id="auth-section" class="auth">
+    <div class="auth__inner">
+      <mat-card class="auth-card">
+        <h2 class="auth-card__title">{{ isRegister() ? 'Crear Cuenta' : 'Iniciar Sesión' }}</h2>
+        <p class="auth-card__subtitle">Accede a tu plataforma veterinaria</p>
+        <form (submit)="handleLogin($event)">
+          <mat-form-field appearance="outline" class="auth-card__field">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput type="email" required [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="auth-card__field">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" required [ngModel]="password()" (ngModelChange)="password.set($event)" name="password" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="auth-card__field">
+            <mat-label>Tipo de Usuario</mat-label>
+            <mat-select [ngModel]="userType()" (ngModelChange)="userType.set($event)" name="userType">
+              <mat-option value="veterinario">Veterinario</mat-option>
+              <mat-option value="cliente">Cliente</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-flat-button class="auth-card__submit" type="submit">
+            {{ isRegister() ? 'Registrarse' : 'Ingresar' }}
+          </button>
+          <button mat-button class="auth-card__toggle" type="button" (click)="toggleRegister()">
+            {{ isRegister() ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate' }}
+          </button>
+        </form>
+      </mat-card>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">
+            <app-lucide-icon name="heart" [size]="32" [fill]="true" />
+            <span class="footer__brand-name">PetAlert</span>
+          </div>
+          <p class="footer__desc">
+            Sistema inteligente de gestión veterinaria para el cuidado profesional de tus mascotas.
+          </p>
+          <div class="footer__social">
+            <a mat-icon-button class="footer__social--ig" href="https://instagram.com" target="_blank" rel="noopener">
+              <app-lucide-icon name="instagram" [size]="20" />
+            </a>
+            <a mat-icon-button class="footer__social--wa" href="https://wa.me/1234567890" target="_blank" rel="noopener">
+              <mat-icon>chat</mat-icon>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3 class="footer__hours-title">Horarios de Atención</h3>
+          <p class="footer__hours">Lunes a Viernes: 8:00 AM - 8:00 PM</p>
+          <p class="footer__hours">Sábados: 9:00 AM - 6:00 PM</p>
+          <p class="footer__hours">Domingos: 10:00 AM - 2:00 PM</p>
+          <p class="footer__emergency">Emergencias 24/7</p>
+        </div>
+      </div>
+      <div class="footer__copy">
+        <p>© 2026 PetAlert. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</div>

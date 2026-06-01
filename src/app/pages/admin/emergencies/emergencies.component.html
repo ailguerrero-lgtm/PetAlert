@@ -1,0 +1,76 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Centro de Emergencias</h1>
+      <p class="page-subtitle">Sistema de priorización y atención inmediata</p>
+    </div>
+    <button mat-flat-button class="btn-danger">
+      <app-lucide-icon name="alert-circle" [size]="20" />
+      Nueva Emergencia
+    </button>
+  </div>
+
+  <mat-card class="search-card">
+    <mat-form-field appearance="outline" class="search-field">
+      <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
+      <input matInput placeholder="Buscar por mascota, dueño o condición..." />
+    </mat-form-field>
+  </mat-card>
+
+  <div class="content-grid-3">
+    @for (rec of recommendations; track rec.priority) {
+      <mat-card class="guideline-card" [style.border-color]="rec.color" [style.background]="rec.color + '10'">
+        <div class="guideline-card__header">
+          <app-lucide-icon [name]="rec.icon" [size]="24" [color]="rec.color" />
+          <h3 [style.color]="rec.color">{{ rec.priority }}</h3>
+        </div>
+        <p>{{ rec.action }}</p>
+      </mat-card>
+    }
+  </div>
+
+  <h2 class="section-title">Casos Activos ({{ emergencies.length }})</h2>
+
+  <div class="emergency-list">
+    @for (emergency of emergencies; track emergency.id) {
+      <mat-card class="emergency-card" [ngClass]="getPriorityClass(emergency.priority)">
+        <div class="emergency-card__grid">
+          <div class="emergency-card__col">
+            <div class="emergency-card__pet">
+              <app-lucide-icon name="heart" [size]="24" />
+              <div>
+                <h3>{{ emergency.pet }}</h3>
+                <p>{{ emergency.species }} • Dueño: {{ emergency.owner }}</p>
+              </div>
+            </div>
+            <mat-chip [ngClass]="getPriorityClass(emergency.priority)">{{ emergency.priority }}</mat-chip>
+          </div>
+          <div class="emergency-card__col emergency-card__col--center">
+            <p class="emergency-card__condition">{{ emergency.condition }}</p>
+            <p class="emergency-card__symptoms-label">Síntomas:</p>
+            <div class="emergency-card__symptoms">
+              @for (symptom of emergency.symptoms; track symptom) {
+                <mat-chip class="symptom-chip">{{ symptom }}</mat-chip>
+              }
+            </div>
+          </div>
+          <div class="emergency-card__col emergency-card__col--right">
+            <p class="emergency-card__time-label">Hora de ingreso</p>
+            <p class="emergency-card__time">{{ emergency.time }}</p>
+            <mat-chip [ngClass]="getStatusClass(emergency.status)">{{ emergency.status }}</mat-chip>
+            @if (emergency.room !== '-') {
+              <p class="emergency-card__detail">📍 {{ emergency.room }}</p>
+            }
+            @if (emergency.doctor !== '-') {
+              <p class="emergency-card__detail">👨‍⚕️ {{ emergency.doctor }}</p>
+            }
+            <button mat-stroked-button class="emergency-card__contact">
+              <app-lucide-icon name="phone" [size]="16" />
+              Contactar
+            </button>
+          </div>
+        </div>
+      </mat-card>
+    }
+  </div>
+</div>

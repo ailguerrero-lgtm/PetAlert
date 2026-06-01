@@ -1,0 +1,129 @@
+@use '../../page-theme' as *;
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+
+  &__line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: $border;
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  &__dot {
+    position: absolute;
+    left: 8px;
+    top: 30px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid;
+    z-index: 1;
+  }
+}
+
+.record-card {
+  margin-left: 2rem;
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+    transform: translateX(4px);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__icon {
+    display: inline-flex;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+  }
+
+  &__pet {
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+  }
+
+  &__doctor {
+    font-size: 0.75rem;
+    color: $muted;
+    margin: 0;
+  }
+
+  &__section-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin: 0 0 0.5rem;
+    color: $text;
+  }
+
+  &__text {
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0 0 1.5rem;
+  }
+
+  &__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__meds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__notes {
+    padding: 1rem;
+    background: $bg;
+    border-radius: 8px;
+    border-left: 3px solid $primary;
+
+    p {
+      margin: 0;
+      color: #475569;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+:host ::ng-deep .med-chip {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+}

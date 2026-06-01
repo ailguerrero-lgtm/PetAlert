@@ -1,0 +1,98 @@
+@use '../../page-theme' as *;
+
+.settings-page {
+  max-width: 960px;
+}
+
+.settings-section {
+  padding: 2rem !important;
+  margin-bottom: 1.5rem;
+  @include card;
+  box-shadow: none !important;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+  }
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-avatar-block {
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: $primary;
+  color: white;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  .full-span {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toggles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__subtitle {
+    font-weight: 600;
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid $border;
+  margin: 0.5rem 0;
+}
+
+.btn-primary {
+  @include btn-primary;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

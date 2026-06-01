@@ -1,0 +1,139 @@
+@use '../../page-theme' as *;
+
+.pet-tabs-card {
+  margin-bottom: 1.5rem;
+  @include card;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-species {
+  font-size: 0.75rem;
+  color: $muted;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.history-panel {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      flex: 1;
+    }
+  }
+}
+
+.count-chip {
+  font-weight: 600 !important;
+
+  &--blue { background: #eff6ff !important; color: $primary !important; }
+  &--green { background: #d1fae5 !important; color: $secondary !important; }
+  &--warning { background: #fef3c7 !important; color: $warning !important; }
+  &--pink { background: #fce7f3 !important; color: #ec4899 !important; }
+}
+
+.history-accordion {
+  margin-bottom: 0.5rem !important;
+  border: 1px solid $border !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.history-meta {
+  font-size: 0.75rem;
+  color: $muted;
+  margin: 0.25rem 0 0;
+  font-weight: 400;
+}
+
+.accordion-body {
+  padding-top: 0.5rem;
+
+  .accordion-label {
+    font-size: 0.75rem;
+    color: $muted;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+.info-block {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid $border;
+  background: #fafafa;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+
+    .full { grid-column: 1 / -1; }
+    .label { display: block; font-size: 0.75rem; color: $muted; }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.text-green { color: $secondary; }
+.text-muted { color: $muted; font-size: 0.875rem; margin: 0.25rem 0; }
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: $muted;
+
+  p { margin: 1rem 0 0; font-size: 0.875rem; }
+}
+
+.btn-primary {
+  @include btn-primary;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

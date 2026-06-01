@@ -1,0 +1,14 @@
+<div class="app-shell app-shell--client">
+  <div class="app-shell__body">
+    <app-sidebar [isAdmin]="false" />
+    <div class="app-shell__main">
+      <app-topbar [userName]="userName" [userRole]="userRole" />
+      <main class="app-shell__content">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+  @if (showFooter()) {
+    <app-footer />
+  }
+</div>

@@ -1,0 +1,101 @@
+<div class="page-container">
+  <h1 class="page-title">Panel de Control</h1>
+
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <div class="stat-card__row">
+        <div>
+          <p class="stat-card__label">Emergencias Activas</p>
+          <p class="stat-card__value stat-card__value--error">8</p>
+        </div>
+        <div class="stat-card__icon stat-card__icon--error">
+          <app-lucide-icon name="alert-circle" [size]="24" color="#EF4444" />
+        </div>
+      </div>
+      <div class="stat-card__footer">
+        <app-lucide-icon name="trending-up" [size]="16" color="#EF4444" />
+        <span>+2 desde ayer</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-card__row">
+        <div>
+          <p class="stat-card__label">Mascotas Registradas</p>
+          <p class="stat-card__value stat-card__value--primary">324</p>
+        </div>
+        <div class="stat-card__icon stat-card__icon--primary">
+          <app-lucide-icon name="heart" [size]="24" color="#2563EB" />
+        </div>
+      </div>
+      <div class="stat-card__footer">
+        <app-lucide-icon name="trending-up" [size]="16" color="#10B981" />
+        <span>+12 este mes</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-card__row">
+        <div>
+          <p class="stat-card__label">Citas del Día</p>
+          <p class="stat-card__value stat-card__value--secondary">15</p>
+        </div>
+        <div class="stat-card__icon stat-card__icon--secondary">
+          <app-lucide-icon name="calendar" [size]="24" color="#10B981" />
+        </div>
+      </div>
+      <div class="stat-card__footer">
+        <app-lucide-icon name="activity" [size]="16" color="#64748B" />
+        <span>8 completadas</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-card__row">
+        <div>
+          <p class="stat-card__label">Vacunas Pendientes</p>
+          <p class="stat-card__value stat-card__value--warning">23</p>
+        </div>
+        <div class="stat-card__icon stat-card__icon--warning">
+          <app-lucide-icon name="syringe" [size]="24" color="#F59E0B" />
+        </div>
+      </div>
+      <div class="stat-card__footer">
+        <app-lucide-icon name="alert-circle" [size]="16" color="#F59E0B" />
+        <span>Requieren atención</span>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="charts-grid">
+    <mat-card class="chart-card">
+      <h2 class="chart-card__title">Estadísticas Mensuales</h2>
+      <div class="chart-card__canvas-wrap">
+        <canvas #lineChartCanvas></canvas>
+      </div>
+    </mat-card>
+    <mat-card class="chart-card">
+      <h2 class="chart-card__title">Distribución por Especie</h2>
+      <div class="chart-card__canvas-wrap">
+        <canvas #pieChartCanvas></canvas>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="emergencies-card">
+    <h2 class="chart-card__title">Emergencias Recientes</h2>
+    @for (emergency of recentEmergencies; track emergency.id) {
+      <div class="emergency-row">
+        <div class="emergency-row__main">
+          <p class="emergency-row__pet">{{ emergency.pet }}</p>
+          <p class="emergency-row__owner">Dueño: {{ emergency.owner }}</p>
+        </div>
+        <div class="emergency-row__meta">
+          <span class="emergency-row__condition">{{ emergency.condition }}</span>
+          <mat-chip [class]="getPriorityChipClass(emergency.priority)">{{ emergency.priority }}</mat-chip>
+          <span class="emergency-row__time">{{ emergency.time }}</span>
+        </div>
+      </div>
+    }
+  </mat-card>
+</div>

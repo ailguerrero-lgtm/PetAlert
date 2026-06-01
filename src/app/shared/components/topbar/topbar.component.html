@@ -1,0 +1,33 @@
+<mat-toolbar class="topbar">
+  <mat-form-field class="topbar__search" appearance="outline" subscriptSizing="dynamic">
+    <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
+    <input matInput placeholder="Buscar mascotas, clientes, citas..." />
+  </mat-form-field>
+
+  <span class="topbar__spacer"></span>
+
+  <button mat-icon-button type="button" class="topbar__notify" aria-label="Notificaciones">
+    <span matBadge="3" matBadgeColor="warn">
+      <app-lucide-icon name="bell" [size]="20" color="#64748B" />
+    </span>
+  </button>
+
+  <button mat-button type="button" class="topbar__profile" [matMenuTriggerFor]="userMenu">
+    <span class="topbar__avatar">{{ initial }}</span>
+    <span class="topbar__user">
+      <span class="topbar__name">{{ userName }}</span>
+      <span class="topbar__role">{{ userRole }}</span>
+    </span>
+  </button>
+
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <button mat-menu-item type="button">
+      <app-lucide-icon name="user" [size]="18" />
+      <span>Mi Perfil</span>
+    </button>
+    <button mat-menu-item type="button" (click)="logout()">
+      <app-lucide-icon name="log-out" [size]="18" />
+      <span>Cerrar Sesión</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,89 @@
+.footer {
+  background: #1e293b;
+  color: white;
+  padding: 3rem 0;
+  margin-top: auto;
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    margin: 0 0 0 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__desc {
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  &__social {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__social-btn {
+    color: white !important;
+
+    &--ig {
+      background: #334155 !important;
+    }
+
+    &--wa {
+      background: #10b981 !important;
+    }
+  }
+
+  &__section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  &__hours {
+    opacity: 0.8;
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  &__emergency {
+    margin-top: 1rem;
+    color: #ef4444;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  &__copy {
+    border-top: 1px solid #334155;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+
+    p {
+      opacity: 0.7;
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="calendar">
+  <div class="calendar__header">
+    <button mat-icon-button type="button" (click)="handlePrevMonth()">
+      <app-lucide-icon name="chevron-left" [size]="20" />
+    </button>
+    <span class="calendar__title">
+      {{ monthNames[currentMonth().getMonth()] }} {{ currentMonth().getFullYear() }}
+    </span>
+    <button mat-icon-button type="button" (click)="handleNextMonth()">
+      <app-lucide-icon name="chevron-right" [size]="20" />
+    </button>
+  </div>
+  <div class="calendar__weekdays">
+    @for (day of dayNames; track day) {
+      <span class="calendar__weekday">{{ day }}</span>
+    }
+  </div>
+  <div class="calendar__days">
+    @for (day of getDaysInMonth(); track $index) {
+      <button
+        type="button"
+        [class]="getDayClass(day)"
+        [disabled]="!day"
+        (click)="handleDayClick(day)"
+      >
+        {{ day ?? '' }}
+      </button>
+    }
+  </div>
+</div>

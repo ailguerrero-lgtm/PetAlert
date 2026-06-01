@@ -1,0 +1,296 @@
+@use '../page-theme' as *;
+
+.landing {
+  min-height: 100vh;
+  background-color: $bg;
+}
+
+.hero {
+  background: linear-gradient(135deg, $primary 0%, $primary-hover 100%);
+  color: white;
+  padding: 4rem 1.5rem 6rem;
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  &__heart {
+    color: white;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 1rem;
+  }
+
+  &__tagline {
+    font-size: 1.25rem;
+    font-weight: 300;
+    opacity: 0.95;
+    margin: 0 0 2rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__btn {
+    padding: 0.75rem 2rem !important;
+    font-weight: 600 !important;
+
+    &--light {
+      background: white !important;
+      color: $primary !important;
+
+      &:hover {
+        background: #f1f5f9 !important;
+      }
+    }
+
+    &--outline {
+      border-color: white !important;
+      color: white !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+  }
+
+  &__image-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__image {
+    width: 100%;
+    display: block;
+  }
+}
+
+.about {
+  padding: 5rem 1.5rem;
+  background: white;
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0 0 0.5rem;
+  }
+
+  &__text {
+    text-align: center;
+    font-size: 1.125rem;
+    color: $muted;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feature-card {
+  padding: 2rem !important;
+  text-align: center;
+  @include card;
+  box-shadow: none !important;
+
+  &__icon {
+    display: inline-flex;
+    padding: 1rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+
+    &--blue {
+      background: #dbeafe;
+    }
+
+    &--green {
+      background: #d1fae5;
+    }
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: $text;
+  }
+
+  &__body {
+    font-size: 0.875rem;
+    color: $muted;
+    margin: 0;
+  }
+}
+
+.auth {
+  padding: 5rem 1.5rem;
+  background: $bg;
+
+  &__inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+.auth-card {
+  padding: 2.5rem !important;
+  border-radius: 16px !important;
+
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: $text;
+    margin: 0 0 0.25rem;
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: $muted;
+    margin: 0 0 2rem;
+    font-size: 0.875rem;
+  }
+
+  &__field {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  &__submit {
+    width: 100%;
+    padding: 0.75rem !important;
+    @include btn-primary;
+  }
+
+  &__toggle {
+    width: 100%;
+    margin-top: 0.5rem;
+    color: $muted !important;
+  }
+}
+
+.footer {
+  background: $text;
+  color: white;
+  padding: 3rem 1.5rem;
+
+  &__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__desc {
+    opacity: 0.8;
+    margin: 0 0 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  &__social {
+    display: flex;
+    gap: 0.5rem;
+
+    a {
+      color: white;
+    }
+
+    &--ig {
+      background: #334155 !important;
+    }
+
+    &--wa {
+      background: $secondary !important;
+    }
+  }
+
+  &__hours-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  &__hours {
+    opacity: 0.8;
+    margin: 0 0 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  &__emergency {
+    margin-top: 1rem;
+    color: $error;
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  &__copy {
+    border-top: 1px solid #334155;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+
+    p {
+      opacity: 0.7;
+      margin: 0;
+      font-size: 0.875rem;
+    }
+  }
+}

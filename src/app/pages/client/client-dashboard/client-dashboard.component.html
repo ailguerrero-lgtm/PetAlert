@@ -1,0 +1,91 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Mis Mascotas</h1>
+    <button mat-flat-button class="btn-primary" (click)="goRegisterPet()">
+      <app-lucide-icon name="plus" [size]="20" />
+      Agregar Mascota
+    </button>
+  </div>
+
+  <div class="pets-grid">
+    @for (pet of myPets; track pet.id) {
+      <mat-card class="pet-card">
+        <div class="pet-card__image-wrap">
+          <img [src]="pet.image" [alt]="pet.name" />
+          <mat-chip [class]="pet.status === 'Saludable' ? 'status--healthy' : 'status--pending'">{{ pet.status }}</mat-chip>
+        </div>
+        <div class="pet-card__body">
+          <h3>{{ pet.name }}</h3>
+          <p>{{ pet.breed }} • {{ pet.age }}</p>
+          <div class="pet-card__meta">
+            <app-lucide-icon name="syringe" [size]="16" color="#64748B" />
+            <span>Próxima vacuna: {{ pet.nextVaccine }}</span>
+          </div>
+        </div>
+      </mat-card>
+    }
+    <mat-card class="add-pet-card" (click)="goRegisterPet()">
+      <div class="add-pet-card__icon">
+        <app-lucide-icon name="plus" [size]="32" color="#2563EB" />
+      </div>
+      <h3>Agregar Mascota</h3>
+    </mat-card>
+  </div>
+
+  <div class="dashboard-grid">
+    <mat-card class="panel">
+      <div class="panel__header">
+        <app-lucide-icon name="calendar" [size]="24" color="#2563EB" />
+        <h2>Próximas Citas</h2>
+      </div>
+      @for (appointment of upcomingAppointments; track appointment.id) {
+        <div class="appointment-block">
+          <div class="appointment-block__top">
+            <div>
+              <h3>{{ appointment.pet }}</h3>
+              <p>{{ appointment.type }}</p>
+            </div>
+            <mat-chip class="chip--confirmed">Confirmada</mat-chip>
+          </div>
+          <div class="appointment-block__meta">
+            <span>📅 {{ appointment.date }}</span>
+            <span>🕐 {{ appointment.time }}</span>
+            <span>👨‍⚕️ {{ appointment.doctor }}</span>
+          </div>
+        </div>
+      }
+    </mat-card>
+
+    <div class="sidebar-panels">
+      <mat-card class="panel">
+        <div class="panel__header">
+          <app-lucide-icon name="alert-circle" [size]="24" color="#F59E0B" />
+          <h2>Alertas</h2>
+        </div>
+        @for (alert of alerts; track alert.id) {
+          <div class="alert-block" [class.alert-block--high]="alert.priority === 'Alta'">
+            <p class="alert-block__msg">{{ alert.message }}</p>
+            <p class="alert-block__date">En {{ alert.date }}</p>
+          </div>
+        }
+      </mat-card>
+
+      <mat-card class="panel">
+        <div class="panel__header">
+          <app-lucide-icon name="file-text" [size]="24" color="#2563EB" />
+          <h2>Acceso Rápido</h2>
+        </div>
+        <div class="quick-actions">
+          <a mat-stroked-button routerLink="/client/medical-history" class="quick-btn">
+            <app-lucide-icon name="file-text" [size]="18" />
+            Historial Médico
+          </a>
+          <a mat-stroked-button routerLink="/client/appointments" class="quick-btn">
+            <app-lucide-icon name="calendar" [size]="18" />
+            Agendar Cita
+          </a>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

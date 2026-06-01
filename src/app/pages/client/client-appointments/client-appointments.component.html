@@ -1,0 +1,97 @@
+<div class="page-container">
+  <div class="page-header page-header--stack">
+    <h1 class="page-title">Mis Citas</h1>
+    <p class="page-subtitle">Haz clic en una fecha disponible del calendario para agendar una nueva cita</p>
+  </div>
+
+  <div class="appointments-layout">
+    <mat-card class="calendar-panel">
+      <div class="calendar-panel__title">
+        <app-lucide-icon name="calendar" [size]="24" color="#2563EB" />
+        <h2>Calendario</h2>
+      </div>
+      <app-interactive-calendar
+        [availability]="calendarAvailability"
+        [selectedDate]="selectedDateForAppointment()"
+        (dateClick)="handleDateClick($event)"
+      />
+      <div class="calendar-legend">
+        <div class="calendar-legend__item"><span class="dot dot--available"></span><span>Disponible</span></div>
+        <div class="calendar-legend__item"><span class="dot dot--full"></span><span>Sin cupos</span></div>
+      </div>
+      <div class="calendar-today">
+        <p class="calendar-today__label">Mis Próximas Citas</p>
+        <p class="calendar-today__count">{{ confirmedCount() }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="list-panel">
+      <h2 class="list-panel__title">Historial de Citas</h2>
+      <div class="list-panel__body">
+        @if (myAppointments.length === 0) {
+          <div class="empty-state">
+            <app-lucide-icon name="calendar" [size]="48" color="#CBD5E1" />
+            <p>No tienes citas registradas</p>
+          </div>
+        } @else {
+          @for (appointment of myAppointments; track appointment.id) {
+            <div class="appointment-item">
+              <div class="appointment-item__header">
+                <h3>{{ appointment.pet }}</h3>
+                <mat-chip
+                  [style.background]="getStatusStyle(appointment.status).bg"
+                  [style.color]="getStatusStyle(appointment.status).color"
+                >
+                  <app-lucide-icon [name]="getStatusStyle(appointment.status).icon" [size]="14" />
+                  {{ appointment.status }}
+                </mat-chip>
+              </div>
+              <p class="appointment-item__type">{{ appointment.type }}</p>
+              <div class="appointment-item__details">
+                <div><span class="label">Fecha</span><span class="value">{{ appointment.date }}</span></div>
+                <div><span class="label">Hora</span><span class="value">{{ appointment.time }}</span></div>
+                <div class="detail-wide"><span class="label">Veterinario</span><span class="value">{{ appointment.doctor }}</span></div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+@if (openModal()) {
+  <div class="dialog-backdrop" (click)="handleCloseModal()">
+    <mat-card class="dialog-panel" (click)="$event.stopPropagation()">
+      <h2 class="dialog-panel__title">Agendar Nueva Cita</h2>
+      <div class="dialog-panel__content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Seleccionar Mascota</mat-label>
+          <mat-select [ngModel]="formData().petId" (ngModelChange)="handlePetChange($event)">
+            @for (pet of myPets; track pet.id) {
+              <mat-option [value]="pet.id.toString()">{{ pet.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="dialog-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput type="date" [ngModel]="formData().date" (ngModelChange)="updateFormField('date', $event)" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Hora</mat-label>
+            <input matInput type="time" [ngModel]="formData().time" (ngModelChange)="updateFormField('time', $event)" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Motivo de Consulta</mat-label>
+          <textarea matInput rows="4" placeholder="Describe el motivo de la consulta..." [ngModel]="formData().reason" (ngModelChange)="updateFormField('reason', $event)"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="dialog-panel__actions">
+        <button mat-stroked-button type="button" (click)="handleCloseModal()">Cancelar</button>
+        <button mat-flat-button class="btn-primary" type="button" (click)="handleSaveAppointment()">Guardar Cita</button>
+      </div>
+    </mat-card>
+  </div>
+}

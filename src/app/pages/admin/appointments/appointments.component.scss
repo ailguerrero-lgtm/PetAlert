@@ -1,0 +1,206 @@
+@use '../../page-theme' as *;
+
+.appointments-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calendar-panel {
+  padding: 1.5rem !important;
+  @include card;
+  box-shadow: none !important;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.calendar-legend {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: $bg;
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: $muted;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  &--available { background: $secondary; }
+  &--full { background: $error; }
+}
+
+.calendar-today {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #eff6ff;
+  border-radius: 8px;
+
+  &__label {
+    font-weight: 600;
+    color: $primary;
+    margin: 0 0 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  &__count {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin: 0;
+  }
+}
+
+.list-panel {
+  @include card;
+  box-shadow: none !important;
+  overflow: hidden;
+
+  &__body {
+    padding: 1.5rem;
+  }
+}
+
+.appointment-item {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid $border;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: $primary;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+
+    h3 {
+      margin: 0;
+      font-weight: 700;
+    }
+  }
+
+  &__owner {
+    color: $muted;
+    font-size: 0.875rem;
+    margin: 0 0 1rem;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .label {
+      display: block;
+      font-size: 0.75rem;
+      color: $muted;
+    }
+
+    .value {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: $muted;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.dialog-panel {
+  width: 100%;
+  max-width: 480px;
+  padding: 0 !important;
+  border-radius: 12px !important;
+
+  &__title {
+    padding: 1.5rem 1.5rem 0;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: $text;
+  }
+
+  &__content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__actions {
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+.full-width { width: 100%; }
+
+.dialog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-primary { @include btn-primary; }

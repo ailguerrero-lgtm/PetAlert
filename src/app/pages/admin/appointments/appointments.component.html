@@ -1,0 +1,148 @@
+<div class="page-container">
+  <div class="page-header page-header--stack">
+    <h1 class="page-title">Gestión de Citas</h1>
+    <p class="page-subtitle">Haz clic en una fecha disponible del calendario para agendar una nueva cita</p>
+  </div>
+
+  <div class="appointments-layout">
+    <mat-card class="calendar-panel">
+      <div class="calendar-panel__title">
+        <app-lucide-icon name="calendar" [size]="24" color="#2563EB" />
+        <h2>Calendario</h2>
+      </div>
+      <app-interactive-calendar
+        [availability]="calendarAvailability"
+        [selectedDate]="selectedDateForAppointment()"
+        (dateClick)="handleDateClick($event)"
+      />
+      <div class="calendar-legend">
+        <div class="calendar-legend__item">
+          <span class="dot dot--available"></span>
+          <span>Disponible</span>
+        </div>
+        <div class="calendar-legend__item">
+          <span class="dot dot--full"></span>
+          <span>Sin cupos</span>
+        </div>
+      </div>
+      <div class="calendar-today">
+        <p class="calendar-today__label">Citas de Hoy</p>
+        <p class="calendar-today__count">{{ todayAppointmentsCount() }}</p>
+      </div>
+    </mat-card>
+
+    <mat-card class="list-panel">
+      <mat-tab-group [selectedIndex]="selectedTab()" (selectedIndexChange)="selectedTab.set($event)">
+        <mat-tab label="Todas"></mat-tab>
+        <mat-tab label="Pendientes"></mat-tab>
+        <mat-tab label="Completadas"></mat-tab>
+        <mat-tab label="Canceladas"></mat-tab>
+      </mat-tab-group>
+
+      <div class="list-panel__body">
+        @if (filteredAppointments().length === 0) {
+          <div class="empty-state">
+            <app-lucide-icon name="calendar" [size]="48" color="#CBD5E1" />
+            <p>No hay citas en esta categoría</p>
+          </div>
+        } @else {
+          @for (appointment of filteredAppointments(); track appointment.id) {
+            <div class="appointment-item">
+              <div class="appointment-item__main">
+                <div class="appointment-item__header">
+                  <h3>{{ appointment.pet }}</h3>
+                  <mat-chip
+                    [style.background]="getStatusConfig(appointment.status).bg"
+                    [style.color]="getStatusConfig(appointment.status).color"
+                  >
+                    <app-lucide-icon [name]="getStatusConfig(appointment.status).icon" [size]="14" />
+                    {{ appointment.status }}
+                  </mat-chip>
+                </div>
+                <p class="appointment-item__owner">Cliente: {{ appointment.owner }}</p>
+                <div class="appointment-item__details">
+                  <div>
+                    <span class="label">Fecha</span>
+                    <span class="value">{{ appointment.date }}</span>
+                  </div>
+                  <div>
+                    <span class="label">Hora</span>
+                    <span class="value">{{ appointment.time }}</span>
+                  </div>
+                  <div>
+                    <span class="label">Tipo</span>
+                    <span class="value">{{ appointment.type }}</span>
+                  </div>
+                  <div>
+                    <span class="label">Veterinario</span>
+                    <span class="value">{{ appointment.doctor }}</span>
+                  </div>
+                </div>
+              </div>
+              @if (appointment.status === 'Pendiente') {
+                <div class="appointment-item__actions">
+                  <button mat-stroked-button color="primary">Completar</button>
+                  <button mat-stroked-button color="warn">Cancelar</button>
+                </div>
+              }
+            </div>
+          }
+        }
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+@if (openModal()) {
+  <div class="dialog-backdrop" (click)="handleCloseModal()">
+    <mat-card class="dialog-panel" (click)="$event.stopPropagation()">
+      <h2 class="dialog-panel__title">Agendar Nueva Cita</h2>
+      <div class="dialog-panel__content">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre de la Mascota</mat-label>
+          <input matInput [ngModel]="formData().petName" (ngModelChange)="updateFormField('petName', $event)" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Propietario</mat-label>
+          <input matInput [ngModel]="formData().owner" (ngModelChange)="updateFormField('owner', $event)" />
+        </mat-form-field>
+        <div class="dialog-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput type="date" [ngModel]="formData().date" (ngModelChange)="updateFormField('date', $event)" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Hora</mat-label>
+            <input matInput type="time" [ngModel]="formData().time" (ngModelChange)="updateFormField('time', $event)" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Veterinario Asignado</mat-label>
+          <mat-select [ngModel]="formData().doctor" (ngModelChange)="updateFormField('doctor', $event)">
+            <mat-option value="Dr. Juan Pérez">Dr. Juan Pérez</mat-option>
+            <mat-option value="Dra. María González">Dra. María González</mat-option>
+            <mat-option value="Dr. Luis Martínez">Dr. Luis Martínez</mat-option>
+            <mat-option value="Dra. Ana García">Dra. Ana García</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Motivo de Consulta</mat-label>
+          <textarea matInput rows="3" [ngModel]="formData().reason" (ngModelChange)="updateFormField('reason', $event)"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Estado de la Cita</mat-label>
+          <mat-select [ngModel]="formData().status" (ngModelChange)="updateFormField('status', $event)">
+            <mat-option value="Pendiente">Pendiente</mat-option>
+            <mat-option value="Completada">Completada</mat-option>
+            <mat-option value="Cancelada">Cancelada</mat-option>
+            <mat-option value="Emergencia">Emergencia</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="dialog-panel__actions">
+        <button mat-stroked-button type="button" (click)="handleCloseModal()">Cancelar</button>
+        <button mat-flat-button class="btn-primary" type="button" (click)="handleSaveAppointment()">Guardar Cita</button>
+      </div>
+    </mat-card>
+  </div>
+}

@@ -1,0 +1,137 @@
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Historial Médico</h1>
+      <p class="page-subtitle">Visualiza el historial médico completo de tus mascotas</p>
+    </div>
+    <button mat-flat-button class="btn-primary" (click)="handleDownloadPDF()">
+      <app-lucide-icon name="download" [size]="20" />
+      Descargar PDF
+    </button>
+  </div>
+
+  <mat-card class="pet-tabs-card">
+    <mat-tab-group [selectedIndex]="selectedPet()" (selectedIndexChange)="selectedPet.set($event)">
+      @for (pet of myPets; track pet.id) {
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <span class="tab-label">
+              <strong>{{ pet.name }}</strong>
+              <span class="tab-species">{{ pet.species }}</span>
+            </span>
+          </ng-template>
+        </mat-tab>
+      }
+    </mat-tab-group>
+  </mat-card>
+
+  <div class="history-grid">
+    <mat-card class="history-panel">
+      <div class="history-panel__header">
+        <app-lucide-icon name="calendar" [size]="24" color="#2563EB" />
+        <h2>Consultas</h2>
+        <mat-chip class="count-chip count-chip--blue">{{ currentHistory().consultations.length }}</mat-chip>
+      </div>
+      @if (currentHistory().consultations.length === 0) {
+        <div class="empty-state">
+          <app-lucide-icon name="calendar" [size]="48" color="#CBD5E1" />
+          <p>No hay consultas registradas</p>
+        </div>
+      } @else {
+        <mat-accordion>
+          @for (c of currentHistory().consultations; track c.id) {
+            <mat-expansion-panel class="history-accordion">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <div>
+                    <strong>{{ c.type }}</strong>
+                    <p class="history-meta">{{ c.date }} • {{ c.doctor }}</p>
+                  </div>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="accordion-body">
+                <p class="accordion-label">Diagnóstico</p>
+                <p>{{ c.diagnosis }}</p>
+                <p class="accordion-label">Observaciones</p>
+                <p>{{ c.observations }}</p>
+              </div>
+            </mat-expansion-panel>
+          }
+        </mat-accordion>
+      }
+    </mat-card>
+
+    <mat-card class="history-panel">
+      <div class="history-panel__header">
+        <app-lucide-icon name="syringe" [size]="24" color="#10B981" />
+        <h2>Vacunas</h2>
+        <mat-chip class="count-chip count-chip--green">{{ currentHistory().vaccines.length }}</mat-chip>
+      </div>
+      @if (currentHistory().vaccines.length === 0) {
+        <div class="empty-state">
+          <app-lucide-icon name="syringe" [size]="48" color="#CBD5E1" />
+          <p>No hay vacunas registradas</p>
+        </div>
+      } @else {
+        @for (v of currentHistory().vaccines; track v.id) {
+          <div class="info-block">
+            <h3>{{ v.name }}</h3>
+            <div class="info-block__grid">
+              <div><span class="label">Fecha Aplicación</span><strong>{{ v.date }}</strong></div>
+              <div><span class="label">Próxima Dosis</span><strong class="text-green">{{ v.nextDate }}</strong></div>
+              <div class="full"><span class="label">Lote</span><span>{{ v.lot }}</span></div>
+            </div>
+          </div>
+        }
+      }
+    </mat-card>
+
+    <mat-card class="history-panel">
+      <div class="history-panel__header">
+        <app-lucide-icon name="activity" [size]="24" color="#F59E0B" />
+        <h2>Tratamientos</h2>
+        <mat-chip class="count-chip count-chip--warning">{{ currentHistory().treatments.length }}</mat-chip>
+      </div>
+      @if (currentHistory().treatments.length === 0) {
+        <div class="empty-state">
+          <app-lucide-icon name="activity" [size]="48" color="#CBD5E1" />
+          <p>No hay tratamientos registrados</p>
+        </div>
+      } @else {
+        @for (t of currentHistory().treatments; track t.id) {
+          <div class="info-block">
+            <div class="info-block__row">
+              <h3>{{ t.name }}</h3>
+              <mat-chip [class]="t.status === 'Completado' ? 'status--done' : 'status--pending'">{{ t.status }}</mat-chip>
+            </div>
+            <p class="text-muted">Inicio: {{ t.startDate }}</p>
+            <p class="text-muted">Duración: {{ t.duration }}</p>
+          </div>
+        }
+      }
+    </mat-card>
+
+    <mat-card class="history-panel">
+      <div class="history-panel__header">
+        <app-lucide-icon name="pill" [size]="24" color="#EC4899" />
+        <h2>Medicamentos</h2>
+        <mat-chip class="count-chip count-chip--pink">{{ currentHistory().medications.length }}</mat-chip>
+      </div>
+      @if (currentHistory().medications.length === 0) {
+        <div class="empty-state">
+          <app-lucide-icon name="pill" [size]="48" color="#CBD5E1" />
+          <p>No hay medicamentos registrados</p>
+        </div>
+      } @else {
+        @for (m of currentHistory().medications; track m.id) {
+          <div class="info-block">
+            <h3>{{ m.name }}</h3>
+            <p class="text-muted">Dosis: {{ m.dose }}</p>
+            <p class="text-muted">Frecuencia: {{ m.frequency }}</p>
+            <p class="text-muted">Fecha: {{ m.date }}</p>
+          </div>
+        }
+      }
+    </mat-card>
+  </div>
+</div>

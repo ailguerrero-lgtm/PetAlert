@@ -1,0 +1,86 @@
+$border: #e2e8f0;
+$sidebar-width: 260px;
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: $sidebar-width;
+  right: 0;
+  height: 64px;
+  background: white !important;
+  border-bottom: 1px solid $border;
+  z-index: 90;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &__search {
+    width: 400px;
+    max-width: 40vw;
+
+    ::ng-deep .mat-mdc-text-field-wrapper {
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__notify {
+    margin-right: 0.5rem;
+  }
+
+  &__profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: auto;
+    padding: 0 0.5rem;
+  }
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.2;
+  }
+
+  &__role {
+    font-size: 0.75rem;
+    color: #64748b;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    left: 0;
+
+    &__search {
+      display: none;
+    }
+  }
+}
