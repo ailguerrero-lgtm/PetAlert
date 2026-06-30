@@ -5,40 +5,109 @@ $sidebar-width: 260px;
   position: fixed;
   top: 0;
   left: $sidebar-width;
-  right: 0;
+  // CORRECCIÓN CLAVE: Calcula el ancho exacto restando la barra lateral para que no se desborde de la pantalla
+  width: calc(100% - #{$sidebar-width}) !important;
   height: 64px;
   background: white !important;
   border-bottom: 1px solid $border;
-  z-index: 90;
-  padding: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  z-index: 99 !important;
+  padding: 0 1.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+
+  // Asegura que las filas internas hereden el comportamiento flexbox
+  ::ng-deep .mat-mdc-toolbar-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  &__search-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
 
   &__search {
     width: 400px;
     max-width: 40vw;
 
+    ::ng-deep .mdc-notched-outline {
+      display: none !important;
+    }
+
     ::ng-deep .mat-mdc-text-field-wrapper {
-      background: #f8fafc;
-      border-radius: 8px;
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 30px !important;
+      box-shadow: none !important;
+    }
+
+    ::ng-deep .mat-mdc-form-field-flex {
+      padding: 0 16px !important;
+      align-items: center !important;
+      height: 40px !important;
+    }
+
+    ::ng-deep .mat-mdc-form-field-infix {
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
     }
   }
 
   &__spacer {
-    flex: 1;
+    flex: 1 1 auto !important;
+  }
+
+  // CONTENEDOR DE ACCIONES DERECHAS TOTALMENTE VISIBLE Y ALINEADO
+  &__actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.25rem !important;
+    height: 100% !important;
+    flex-shrink: 0 !important; // Evita que este bloque se achique o colapse
+    padding-right: 0.5rem; // Margen de seguridad para que se despegue del borde derecho
   }
 
   &__notify {
-    margin-right: 0.5rem;
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+
+    ::ng-deep .mat-badge-content {
+      top: 4px !important;
+      right: 4px !important;
+      font-size: 10px;
+      font-weight: bold;
+      z-index: 10;
+    }
   }
 
   &__profile {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: auto;
-    padding: 0 0.5rem;
+    min-width: auto !important;
+    padding: 0 0.5rem !important;
+    height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+
+    ::ng-deep .mdc-button__label {
+      display: block !important;
+      width: 100% !important;
+    }
+  }
+
+  &__profile-content {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
   }
 
   &__avatar {
@@ -47,18 +116,19 @@ $sidebar-width: 260px;
     border-radius: 50%;
     background: #2563eb;
     color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-weight: 600;
     font-size: 0.9rem;
+    flex-shrink: 0 !important;
   }
 
   &__user {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
   }
 
   &__name {
@@ -75,12 +145,93 @@ $sidebar-width: 260px;
   }
 }
 
+::ng-deep .topbar__menu {
+  border-radius: 12px !important;
+  margin-top: 8px;
+
+  button {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
 @media (max-width: 768px) {
   .topbar {
     left: 0;
+    width: 100% !important;
 
-    &__search {
+    &__search-container {
       display: none;
     }
+  }
+}
+// ESTILOS PARA EL PANEL DE NOTIFICACIONES FUNCIONAL
+::ng-deep .topbar__notify-menu {
+  border-radius: 12px !important;
+  margin-top: 8px;
+  width: 320px !important;
+  max-width: 90vw;
+  padding: 0 !important;
+
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+  }
+}
+
+.topbar {
+  &__notify-header {
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+  }
+
+  &__notify-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.75rem;
+    padding: 12px 16px !important;
+    height: auto !important;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: normal !important;
+    line-height: 1.4 !important;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__notify-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+
+    &--emergency { background-color: #fee2e2; }
+    &--appointment { background-color: #dbeafe; }
+    &--reminder { background-color: #fef9c3; }
+  }
+
+  &__notify-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__notify-msg {
+    margin: 0;
+    font-size: 0.815rem;
+    color: #334155;
+  }
+
+  &__notify-time {
+    font-size: 0.715rem;
+    color: #94a3b8;
   }
 }

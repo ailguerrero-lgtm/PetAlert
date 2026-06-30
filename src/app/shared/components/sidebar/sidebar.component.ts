@@ -37,7 +37,6 @@ export class SidebarComponent {
     { text: 'Mis Mascotas', icon: 'heart', path: '/client' },
     { text: 'Citas', icon: 'calendar', path: '/client/appointments' },
     { text: 'Historial Médico', icon: 'file-text', path: '/client/medical-history' },
-    { text: 'Alertas', icon: 'bell', path: '/client' },
   ];
 
   get menuItems(): MenuItem[] {

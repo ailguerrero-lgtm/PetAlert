@@ -6,21 +6,23 @@
 
   <mat-nav-list class="sidebar__nav">
     @for (item of menuItems; track item.text) {
-      <a
-        mat-list-item
-        [routerLink]="item.path"
-        routerLinkActive="sidebar__link--active"
-        [routerLinkActiveOptions]="{ exact: item.path === '/admin' || item.path === '/client' }"
-        class="sidebar__link"
-      >
-        <app-lucide-icon
-          matListItemIcon
-          [name]="item.icon"
-          [size]="20"
-          class="sidebar__icon"
-        />
-        <span matListItemTitle>{{ item.text }}</span>
-      </a>
+      @if (item.text !== 'Mis Mascotas') {
+        <a
+          mat-list-item
+          [routerLink]="item.path"
+          routerLinkActive="sidebar__link--active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/admin' || item.path === '/client' }"
+          class="sidebar__link"
+        >
+          <app-lucide-icon
+            matListItemIcon
+            [name]="item.icon"
+            [size]="20"
+            class="sidebar__icon"
+          />
+          <span matListItemTitle>{{ item.text }}</span>
+        </a>
+      }
     }
   </mat-nav-list>
 </aside>

@@ -1,33 +1,78 @@
 <mat-toolbar class="topbar">
-  <mat-form-field class="topbar__search" appearance="outline" subscriptSizing="dynamic">
-    <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
-    <input matInput placeholder="Buscar mascotas, clientes, citas..." />
-  </mat-form-field>
+  <div class="topbar__search-container">
+    <mat-form-field class="topbar__search" appearance="outline" subscriptSizing="dynamic">
+      <app-lucide-icon matPrefix name="search" [size]="20" color="#64748B" />
+      <input 
+        matInput 
+        placeholder="Buscar mascotas, clientes, citas..." 
+        [(ngModel)]="searchQuery" 
+        (input)="onSearchChange()" 
+      />
+    </mat-form-field>
+  </div>
 
   <span class="topbar__spacer"></span>
 
-  <button mat-icon-button type="button" class="topbar__notify" aria-label="Notificaciones">
-    <span matBadge="3" matBadgeColor="warn">
+  <div class="topbar__actions">
+    <button mat-icon-button type="button" class="topbar__notify" aria-label="Notificaciones" matBadge="3" matBadgeColor="warn" [matMenuTriggerFor]="notifyMenu">
       <app-lucide-icon name="bell" [size]="20" color="#64748B" />
-    </span>
-  </button>
+    </button>
 
-  <button mat-button type="button" class="topbar__profile" [matMenuTriggerFor]="userMenu">
-    <span class="topbar__avatar">{{ initial }}</span>
-    <span class="topbar__user">
-      <span class="topbar__name">{{ userName }}</span>
-      <span class="topbar__role">{{ userRole }}</span>
-    </span>
-  </button>
+    <button mat-button type="button" class="topbar__profile" [matMenuTriggerFor]="userMenu">
+      <div class="topbar__profile-content">
+        <span class="topbar__avatar">{{ initial }}</span>
+        <span class="topbar__user">
+          <span class="topbar__name">{{ userName }}</span>
+          <span class="topbar__role">{{ userRole }}</span>
+        </span>
+      </div>
+    </button>
+  </div>
 
-  <mat-menu #userMenu="matMenu" xPosition="before">
-    <button mat-menu-item type="button">
+  <mat-menu #notifyMenu="matMenu" xPosition="before" class="topbar__notify-menu">
+    <div class="topbar__notify-header">
+      <span>Notificaciones</span>
+    </div>
+    
+    <button mat-menu-item class="topbar__notify-item">
+      <div class="topbar__notify-icon topbar__notify-icon--emergency">
+        <app-lucide-icon name="alert-triangle" [size]="16" color="#ef4444" />
+      </div>
+      <div class="topbar__notify-text">
+        <p class="topbar__notify-msg"><strong>Emergencia Crítica:</strong> Canino "Max" ingresando.</p>
+        <span class="topbar__notify-time">Hace 2 min</span>
+      </div>
+    </button>
+
+    <button mat-menu-item class="topbar__notify-item">
+      <div class="topbar__notify-icon topbar__notify-icon--appointment">
+        <app-lucide-icon name="calendar" [size]="16" color="#2563eb" />
+      </div>
+      <div class="topbar__notify-text">
+        <p class="topbar__notify-msg">Nueva cita agendada por María López.</p>
+        <span class="topbar__notify-time">Hace 15 min</span>
+      </div>
+    </button>
+
+    <button mat-menu-item class="topbar__notify-item">
+      <div class="topbar__notify-icon topbar__notify-icon--reminder">
+        <app-lucide-icon name="clock" [size]="16" color="#eab308" />
+      </div>
+      <div class="topbar__notify-text">
+        <p class="topbar__notify-msg">Recordatorio de vacuna pendiente para "Luna".</p>
+        <span class="topbar__notify-time">Hace 1 hora</span>
+      </div>
+    </button>
+  </mat-menu>
+
+  <mat-menu #userMenu="matMenu" xPosition="before" class="topbar__menu">
+    <button mat-menu-item type="button" routerLink="/client/profile">
       <app-lucide-icon name="user" [size]="18" />
-      <span>Mi Perfil</span>
+      <span style="margin-left: 8px;">Mi Perfil</span>
     </button>
     <button mat-menu-item type="button" (click)="logout()">
       <app-lucide-icon name="log-out" [size]="18" />
-      <span>Cerrar Sesión</span>
+      <span style="margin-left: 8px;">Cerrar Sesión</span>
     </button>
   </mat-menu>
 </mat-toolbar>

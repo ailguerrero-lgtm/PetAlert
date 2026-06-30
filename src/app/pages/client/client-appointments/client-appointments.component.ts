@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -9,14 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { InteractiveCalendarComponent } from '../../../shared/components/interactive-calendar/interactive-calendar.component';
 import { LucideIconComponent } from '../../../shared/components/lucide-icon/lucide-icon.component';
-
-const myPets = [{ id: 1, name: 'Max' }, { id: 2, name: 'Luna' }];
-
-const myAppointments = [
-  { id: 1, pet: 'Max', date: '2026-05-25', time: '10:00 AM', type: 'Chequeo General', doctor: 'Dr. Juan Pérez', status: 'Confirmada' },
-  { id: 2, pet: 'Luna', date: '2026-05-28', time: '3:00 PM', type: 'Vacunación', doctor: 'Dra. María González', status: 'Confirmada' },
-  { id: 3, pet: 'Max', date: '2026-05-22', time: '11:00 AM', type: 'Control de Peso', doctor: 'Dr. Luis Martínez', status: 'Completada' },
-];
+import { PetStoreService } from '../../../core/services/pet-store.service';
 
 const calendarAvailability: Record<string, number> = {
   '2026-05-25': 2, '2026-05-26': 5, '2026-05-27': 0, '2026-05-28': 3,
@@ -50,8 +43,17 @@ interface ClientAppointmentForm {
   styleUrl: './client-appointments.component.scss',
 })
 export class ClientAppointmentsComponent {
-  readonly myPets = myPets;
-  readonly myAppointments = myAppointments;
+  private readonly petStore = inject(PetStoreService);
+
+  // Leemos dinámicamente desde el servicio global
+  get myPets() {
+    return this.petStore.pets();
+  }
+
+  get myAppointments() {
+    return this.petStore.appointments();
+  }
+
   readonly calendarAvailability = calendarAvailability;
 
   openModal = signal(false);
@@ -65,8 +67,9 @@ export class ClientAppointmentsComponent {
     reason: '',
   });
 
+  // Calculamos las confirmadas dinámicamente basándonos en el servicio
   confirmedCount = computed(
-    () => myAppointments.filter((a) => a.status === 'Confirmada').length,
+    () => this.petStore.appointments().filter((a) => a.status === 'Confirmada').length,
   );
 
   handleDateClick(dateStr: string): void {
@@ -81,7 +84,23 @@ export class ClientAppointmentsComponent {
   }
 
   handleSaveAppointment(): void {
-    console.log('Guardando cita:', this.formData());
+    const data = this.formData();
+
+    if (!data.petId || !data.date || !data.time || !data.reason) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
+
+    // Guardamos la cita en el almacén global
+    this.petStore.addAppointment({
+      pet: data.petName,
+      type: data.reason,
+      date: data.date,
+      time: data.time,
+      doctor: 'Dr. Juan Pérez'
+    });
+
+    alert(`¡Cita para ${data.petName} agendada correctamente!`);
     this.handleCloseModal();
   }
 
@@ -90,7 +109,7 @@ export class ClientAppointmentsComponent {
   }
 
   handlePetChange(petId: string): void {
-    const pet = myPets.find((p) => p.id.toString() === petId);
+    const pet = this.myPets.find((p) => p.id.toString() === petId.toString());
     this.formData.update((prev) => ({ ...prev, petId, petName: pet?.name ?? '' }));
   }
 

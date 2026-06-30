@@ -1,89 +1,148 @@
-.footer {
-  background: #1e293b;
-  color: white;
-  padding: 3rem 0;
-  margin-top: auto;
+$sidebar-width: 260px;
+$bg-dark: #1e293b;
 
-  &__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
+.footer {
+  background-color: $bg-dark !important;
+  color: #ffffff !important;
+  padding: 3rem 2rem 1.5rem 2rem !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  
+  margin-left: $sidebar-width !important;
+  width: calc(100% - #{$sidebar-width}) !important;
+
+  &__content {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important; 
+    align-items: flex-start !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    gap: 2rem !important;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
+  &__brand-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    max-width: 450px !important;
   }
 
   &__brand {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    font-size: 1.75rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
   }
 
-  &__title {
-    margin: 0 0 0 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
+  &__description {
+    color: #94a3b8 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
   }
 
-  &__desc {
-    opacity: 0.8;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+  &__socials {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1rem !important;
+    margin-top: 0.5rem !important;
   }
 
-  &__social {
-    display: flex;
-    gap: 0.5rem;
-  }
+  &__icon-btn {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: #334155 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: background 0.2s ease !important;
 
-  &__social-btn {
-    color: white !important;
-
-    &--ig {
-      background: #334155 !important;
+    &:hover {
+      background: #475569 !important;
     }
 
-    &--wa {
-      background: #10b981 !important;
+    &--instagram {
+      &:hover {
+        background: #e1306c !important; // Color característico de Instagram al hacer hover
+      }
+    }
+
+    &--whatsapp {
+      background: #0ea5e9 !important; 
+      &:hover {
+        background: #0284c7 !important;
+      }
     }
   }
 
-  &__section-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin: 0 0 1rem;
+  &__hours-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.85rem !important;
+    min-width: 280px !important;
+    text-align: left !important;
   }
 
-  &__hours {
-    opacity: 0.8;
-    margin: 0 0 0.5rem;
-    font-size: 0.875rem;
+  &__hours-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+  }
+
+  &__hours-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    font-size: 0.9rem !important;
+    color: #94a3b8 !important;
+    
+    p {
+      margin: 0 !important;
+    }
   }
 
   &__emergency {
-    margin-top: 1rem;
-    color: #ef4444;
-    font-weight: 600;
-    font-size: 0.875rem;
+    color: #ef4444 !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    margin-top: 0.25rem !important;
   }
 
-  &__copy {
-    border-top: 1px solid #334155;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    text-align: center;
+  &__divider {
+    border: none !important;
+    border-top: 1px solid #334155 !important;
+    margin: 2.5rem 0 1.5rem 0 !important;
+    width: 100% !important;
+  }
 
-    p {
-      opacity: 0.7;
-      margin: 0;
-      font-size: 0.875rem;
+  &__copyright {
+    text-align: center !important;
+    font-size: 0.8rem !important;
+    color: #64748b !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer {
+    &__content {
+      flex-direction: column !important;
+      gap: 2.5rem !important;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-left: 0 !important;
+    width: 100% !important;
   }
 }

@@ -8,7 +8,7 @@
     <h1 class="page-title">Registrar Nueva Mascota</h1>
     <p class="page-subtitle">Completa la información de tu mascota para crear su perfil médico</p>
 
-    <form (submit)="handleSubmit($event)">
+    <form (ngSubmit)="handleSubmit($event)">
       <div class="upload-zone">
         <app-lucide-icon name="upload" [size]="48" color="#64748B" />
         <p>Subir fotografía de tu mascota</p>
@@ -20,6 +20,12 @@
           <mat-label>Nombre</mat-label>
           <input matInput required [ngModel]="formData().name" (ngModelChange)="handleChange('name', $event)" name="name" />
         </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Dueño / Responsable</mat-label>
+          <input matInput required [ngModel]="formData().owner" (ngModelChange)="handleChange('owner', $event)" name="owner" />
+        </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Especie</mat-label>
           <mat-select required [ngModel]="formData().species" (ngModelChange)="handleChange('species', $event)" name="species">
@@ -30,14 +36,17 @@
             <mat-option value="otro">Otro</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Raza</mat-label>
           <input matInput required [ngModel]="formData().breed" (ngModelChange)="handleChange('breed', $event)" name="breed" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Edad</mat-label>
           <input matInput required placeholder="Ej: 3 años" [ngModel]="formData().age" (ngModelChange)="handleChange('age', $event)" name="age" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Sexo</mat-label>
           <mat-select required [ngModel]="formData().sex" (ngModelChange)="handleChange('sex', $event)" name="sex">
@@ -45,17 +54,20 @@
             <mat-option value="hembra">Hembra</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>Peso</mat-label>
           <input matInput required placeholder="Ej: 15 kg" [ngModel]="formData().weight" (ngModelChange)="handleChange('weight', $event)" name="weight" />
         </mat-form-field>
+
         <mat-form-field appearance="outline" class="full-span">
           <mat-label>Vacunas Aplicadas</mat-label>
-          <textarea matInput rows="3" placeholder="Lista de vacunas que tiene tu mascota..." [ngModel]="formData().vaccines" (ngModelChange)="handleChange('vaccines', $event)" name="vaccines"></textarea>
+          <textarea matInput rows="3" placeholder="Lista de vacunas..." [ngModel]="formData().vaccines" (ngModelChange)="handleChange('vaccines', $event)" name="vaccines"></textarea>
         </mat-form-field>
+
         <mat-form-field appearance="outline" class="full-span">
           <mat-label>Alergias o Condiciones Médicas</mat-label>
-          <textarea matInput rows="3" placeholder="Describe cualquier alergia o condición médica conocida..." [ngModel]="formData().allergies" (ngModelChange)="handleChange('allergies', $event)" name="allergies"></textarea>
+          <textarea matInput rows="3" placeholder="Describe alergias..." [ngModel]="formData().allergies" (ngModelChange)="handleChange('allergies', $event)" name="allergies"></textarea>
         </mat-form-field>
       </div>
 
